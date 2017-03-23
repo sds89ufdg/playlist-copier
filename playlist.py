@@ -15,7 +15,7 @@ def process_cmdline():
 	global playlist, destination
 	
 	playlist = args.playlist
-	destination = args.destination
+	destination = args.destination+os.path.basename(playlist).split(".")[0]+"/"
 
 
 def os_command_output(command_run):
@@ -56,6 +56,9 @@ def create_file_array():
 def process_files():
 
 	for entry in files:
+
+		delete_src_flac = "n"
+
 		codec, rate, type_full, artist, album, track_num, track_name, filefull = entry.split('|')
 		filename = os.path.basename(filefull).strip("\"")
 
