@@ -4,7 +4,7 @@ Tested on OSX running python 3.6.0
 
 Playlist M3U files were created by exporting a playlist from Swinian, I've not tested any other playlist, but as its just a M3U it should be ok, YMMV.
 
-Problem: how to get audio files onto a USB device for the car, without having to manually copy files or worry about the problem of ALAC files not being supported on BMWs. Or some VWs don't support FLAC, so you could change the ffmpeg command for instance.
+Problem: how to get audio files onto a USB device for the car, without having to manually copy files or worry about the problem of ALAC files not being supported by BMW. Or some VW units don't support FLAC, so you could change the ffmpeg command for instance for whatever you or just a new function.
 
 
 ### Dependencies
