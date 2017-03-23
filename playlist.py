@@ -22,8 +22,6 @@ def os_command_output(command_run):
 	command_execute = subprocess.Popen(command_run, stdout=subprocess.PIPE, shell=True)
 	(command_execute_output, err) = command_execute.communicate()
 	command_execute_status = command_execute.wait()
-	#print "Command output : ", command_execute_output
-	#print "Command exit status/return code : ", command_execute_status
 
 	return command_execute_output
 
@@ -33,28 +31,18 @@ def create_file_array():
 
 		for line in iter(f):
 			if not line.startswith("#"):
-				#print line
 				fullfile = "\"/"+line.strip("../")+"\""
 							
 				try:
 					os.path.isfile(fullfile)
-				#print fullfile
-				
 
 					OS_AUDIO_INFO = "mediainfo --Language=raw \"--output=Audio;%Format%|%BitDepth/String%|%Format/Info%\" "+ fullfile
 					OS_AUDIO_INFO2 = "mediainfo --Language=raw \"--output=General;%Performer%|%Album%|%Track/Position%|%Track%\" "+ fullfile
 
-					#FILE_INFO=str(os_command_output(OS_AUDIO_INFO)).rstrip()
-					#FILE_INFO2=str(os_command_output(OS_AUDIO_INFO2))
-					#FILE_DETAILS=FILE_INFO.rstrip()+"|"+FILE_INFO2.rstrip()+"|"+fullfile
-					
 					FILE_INFO=os_command_output(OS_AUDIO_INFO).decode('utf-8')
 					FILE_INFO2=os_command_output(OS_AUDIO_INFO2).decode('utf-8')
 					FILE_DETAILS=FILE_INFO.rstrip()+"|"+FILE_INFO2.rstrip()+"|"+fullfile
 					
-
-					#print (FILE_DETAILS)
-
 					files.append(FILE_DETAILS)
 
 					
@@ -74,22 +62,16 @@ def process_files():
 		dest_dir = os.path.join(destination, artist, album)
 
 		
-		#print filename
-		#print file
 		file2=filefull.strip("\"")
-		#print (file2)
 
 		if codec == 'ALAC':
 			filefull = convert_alac_to_flac(filefull,filename)
-			#print (filefull)
 			delete_src_flac = "y"
 		
 		if os.path.exists(file2):
 			os.makedirs(dest_dir, exist_ok=True)
-			#shutil.copyfile( file, dest_dir )
 
 			OS_COPY = "cp -v "+filefull+" \""+dest_dir+"\""
-			#print (OS_COPY)
 			os.system(OS_COPY)
 
 			if delete_src_flac == 'y':
