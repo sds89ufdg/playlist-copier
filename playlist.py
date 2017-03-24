@@ -74,7 +74,7 @@ def process_files():
 		if os.path.exists(file2):
 			os.makedirs(dest_dir, exist_ok=True)
 
-			OS_COPY = "cp -v "+filefull+" \""+dest_dir+"\""
+			OS_COPY = "cp -nv "+filefull+" \""+dest_dir+"\""
 			os.system(OS_COPY)
 
 			if delete_src_flac == 'y':
